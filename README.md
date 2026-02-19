@@ -2,6 +2,10 @@
 
 A CLI framework for subcommand-based interfaces with ServiceLoader-based plugin discovery, built on top of Apache Commons CLI.
 
+[![Java Version](https://img.shields.io/badge/java-21+-blue.svg)](https://openjdk.java.net/)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+[![Javadoc](https://img.shields.io/badge/javadoc-1.0.0-brightgreen.svg)](https://scivicslab.github.io/pluggable-cli/)
+
 pluggable-cli keeps parsing logic structured and manageable regardless of how many subcommands exist. Its key feature is the ability to **extend a CLI application with new commands simply by adding a plugin JAR to the classpath**, without modifying the application code.
 
 ## Features

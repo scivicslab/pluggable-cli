@@ -6,57 +6,57 @@
  */
 "use strict";
 const messages = {
-    enterTerm: "Enter a search term",
-    noResult: "No results found",
-    oneResult: "Found one result",
-    manyResults: "Found {0} results",
-    loading: "Loading search index...",
-    searching: "Searching...",
-    redirecting: "Redirecting to first result...",
+    enterTerm: "検索語を入力してください",
+    noResult: "結果が見つかりませんでした",
+    oneResult: "1件の結果が見つかりました",
+    manyResults: "{0}の結果が見つかりました",
+    loading: "検索索引をロード中...",
+    searching: "検索中...",
+    redirecting: "最初の結果にリダイレクト中...",
 }
 const categories = {
-    modules: "Modules",
-    packages: "Packages",
-    types: "Classes and Interfaces",
-    members: "Members",
-    searchTags: "Search Tags"
+    modules: "モジュール",
+    packages: "パッケージ",
+    types: "クラスとインタフェース",
+    members: "メンバー",
+    searchTags: "タグの検索"
 };
 // Localized element descriptors must match values in enum IndexItem.Kind.
 const itemDesc = [
     // Members
-    ["Enum constant in {0}"],
-    ["Variable in {0}"],
-    ["Static variable in {0}"],
-    ["Constructor for {0}"],
-    ["Element in {0}"],
-    ["Method in {0}"],
-    ["Static method in {0}"],
-    ["Record component of {0}"],
+    ["{0}の列挙型定数"],
+    ["{0}の変数"],
+    ["{0}のstatic変数"],
+    ["{0}のコンストラクタ"],
+    ["{0}の要素"],
+    ["{0}のメソッド"],
+    ["{0}のstaticメソッド"],
+    ["{0}のレコード・コンポーネント"],
     // Types in upper and lower case
-    ["Annotation Interface", "annotation interface"],
-    ["Enum Class",           "enum class"],
-    ["Interface",      "interface"],
-    ["Record Class",    "record class"],
-    ["Class",          "class"],
-    ["Exception Class", "exception class"],
+    ["注釈インタフェース", "注釈インタフェース"],
+    ["列挙クラス",           "列挙クラス"],
+    ["インタフェース",      "インタフェース"],
+    ["レコード・クラス",    "レコード・クラス"],
+    ["クラス",          "クラス"],
+    ["例外クラス", "例外クラス"],
     // Tags
-    ["Search tag in {0}"],
-    ["System property in {0}"],
-    ["Section in {0}"],
-    ["External specification in {0}"],
+    ["{0}の検索タグ"],
+    ["{0}のシステム・プロパティ"],
+    ["{0}のセクション"],
+    ["{0}の外部仕様"],
     // Other
-    ["Summary Page"],
+    ["サマリー・ページ"],
 ];
-const mbrDesc = "Member";
-const clsDesc = "Class"
-const pkgDesc = "Package";
-const mdlDesc = "Module";
-const pkgDescLower = "package";
-const mdlDescLower = "module";
-const tagDesc = "Search Tag";
-const inDesc = "{0} in {1}";
-const descDesc = "Description";
-const linkLabel = "Go to search page";
+const mbrDesc = "メンバー";
+const clsDesc = "クラス"
+const pkgDesc = "パッケージ";
+const mdlDesc = "モジュール";
+const pkgDescLower = "パッケージ";
+const mdlDescLower = "モジュール";
+const tagDesc = "検索タグ";
+const inDesc = "{1}の{0}";
+const descDesc = "説明";
+const linkLabel = "検索ページに移動します";
 const NO_MATCH = {};
 const MAX_RESULTS = 300;
 const UNICODE_LETTER = 0;

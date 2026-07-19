@@ -18,8 +18,8 @@ var sortDesc = "sort-desc";
 var tableTab = "table-tab";
 var activeTableTab = "active-table-tab";
 
-const linkIcon = "Link icon";
-const linkToSection = "Link to this section";
+const linkIcon = "リンク・アイコン";
+const linkToSection = "このセクションにリンク";
 
 if (typeof hljs !== "undefined") {
     try {

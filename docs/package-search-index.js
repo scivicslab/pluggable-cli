@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html","k":"18"},{"l":"com.scivicslab.pluggablecli"}];updateSearchResults();
+packageSearchIndex = [{"l":"com.scivicslab.pluggablecli"},{"l":"すべてのパッケージ","u":"allpackages-index.html","k":"18"}];updateSearchResults();

@@ -2,6 +2,7 @@ package com.scivicslab.pluggablecli;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -232,13 +233,27 @@ public class CommandRepository {
 
             String command = args[0];
             this.givenCommand = command;
+
+            // When help is requested, skip option parsing entirely. A command's
+            // Options typically does not declare -h/--help, and may have required
+            // options that are absent when the user only asks for help. Parsing
+            // here would raise a ParseException before the caller can branch on
+            // isHelpRequested(), suppressing the help output.
+            if (this.helpRequested) {
+                return null;
+            }
+
             CommandDefinition def = this.commands.get(command);
             CommandLineParser parser = new DefaultParser();
 
+            // Parse the options against the arguments AFTER the command name. Passing the
+            // full args would leave the command name itself in CommandLine.getArgs() as a
+            // bogus positional argument.
+            String[] commandArgs = Arrays.copyOfRange(args, 1, args.length);
             if (def == null) {
-                cl = parser.parse(this.universalOptions, args);
+                cl = parser.parse(this.universalOptions, commandArgs);
             } else {
-                cl = parser.parse(def.options(), args);
+                cl = parser.parse(def.options(), commandArgs);
             }
         }
         return cl;

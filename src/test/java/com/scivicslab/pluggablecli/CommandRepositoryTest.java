@@ -157,36 +157,53 @@ class CommandRepositoryTest {
 
     @Test
     void parseDetectsHelpFlag() throws ParseException {
+        // Realistic command: it does NOT declare -h/--help itself, and -w is required.
+        // The pre-scan must detect --help, and parse() must not throw on the
+        // unrecognized -h nor on the missing required -w.
         Options opts = new Options();
-        opts.addOption(Option.builder("h").longOpt("help").hasArg(false).required(false).build());
-        repo.addCommand("greet", opts);
+        opts.addOption(Option.builder("w").longOpt("workflow").hasArg().required(true).build());
+        repo.addCommand("run", opts);
 
-        repo.parse(new String[]{"greet", "--help"});
+        repo.parse(new String[]{"run", "--help"});
         assertTrue(repo.isHelpRequested());
+        assertEquals("run", repo.getGivenCommand());
     }
 
     @Test
     void parseDetectsShortHelpFlag() throws ParseException {
+        // Realistic command without its own -h/--help and with a required option.
         Options opts = new Options();
-        opts.addOption(Option.builder("h").longOpt("help").hasArg(false).required(false).build());
-        repo.addCommand("greet", opts);
+        opts.addOption(Option.builder("w").longOpt("workflow").hasArg().required(true).build());
+        repo.addCommand("run", opts);
 
-        repo.parse(new String[]{"greet", "-h"});
+        repo.parse(new String[]{"run", "-h"});
         assertTrue(repo.isHelpRequested());
+        assertEquals("run", repo.getGivenCommand());
     }
 
     @Test
     void parseUnknownCommandFallsBackToUniversalOptions() throws ParseException {
-        CommandLine cl = repo.parse(new String[]{"unknown", "--help"});
+        // An unknown command name is parsed against universalOptions without throwing.
+        CommandLine cl = repo.parse(new String[]{"unknown"});
         assertNotNull(cl);
         assertEquals("unknown", repo.getGivenCommand());
-        assertTrue(repo.isHelpRequested());
+        assertFalse(repo.isHelpRequested());
     }
 
     @Test
     void parseEmptyArgsReturnsNull() throws ParseException {
         CommandLine cl = repo.parse(new String[]{});
         assertNull(cl);
+    }
+
+    @Test
+    void parseDoesNotIncludeCommandNameInArgs() throws ParseException {
+        // Positional arguments must contain only the tokens after the command name,
+        // not the command name itself.
+        repo.addCommand("merge", new Options());
+        CommandLine cl = repo.parse(new String[]{"merge", "srcA", "srcB"});
+        assertEquals("merge", repo.getGivenCommand());
+        assertArrayEquals(new String[]{"srcA", "srcB"}, cl.getArgs());
     }
 
     // -----------------------------------------------------------------------
